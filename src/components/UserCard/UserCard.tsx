@@ -1,31 +1,32 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 
 
-export default function UserCard() {
+export default function UserCard({ user }: { user: any }) {
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
-                <CardMedia
-                    component="img"
-                    height="140"
-                    image="/static/images/cards/contemplative-reptile.jpg"
-                    alt="green iguana"
-                />
                 <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                        {user.name}
+                    </Typography>
                     <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                        {user.username}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                    <Typography gutterBottom variant="body1" component="div">
+                        {user.phone}
                     </Typography>
+                    <Typography gutterBottom variant="body1" component="div">
+                        {user.email}
+                    </Typography>
+                    <Typography gutterBottom variant="body1" component="i">
+                        {user.address.city}
+                    </Typography>
+                    <Typography gutterBottom variant="body1" component="div">
+                        {user.company.name}
+                    </Typography>
+
                 </CardContent>
             </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
-            </CardActions>
         </Card>
     )
 }
