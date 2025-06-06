@@ -9,3 +9,21 @@ export const getUsers = async () => {
     }
     return response.json();
 }
+
+export const getUsersId = async (id: string) => {
+    const response = await fetch(`${apiUrl}/users/${id}`);
+    if (!response.ok) {
+        console.error("Error fetching users id:", response.statusText);
+        throw new Error(`Failed to fetch users id: ${response.statusText}`);
+    }
+    return response.json();
+}
+
+export const getUsersIdPost = async (id: string) => {
+    const response = await fetch(`${apiUrl}/users/${id}/posts`);
+    if (!response.ok) {
+        console.error("Error fetching users posts:", response.statusText);
+        throw new Error(`Failed to fetch users posts: ${response.statusText}`);
+    }
+    return response.json();
+}
