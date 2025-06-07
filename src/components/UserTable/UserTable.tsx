@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Divider, Grid, Stack } from "@mui/material";
 import UserCard from "../UserCard/UserCard";
 
 export default function UserTable({ users }: { users: any[] }) {
@@ -6,12 +6,19 @@ export default function UserTable({ users }: { users: any[] }) {
 
 
     return (
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Stack useFlexGap sx={{
+            flexWrap: 'wrap', 
+            justifyContent: "space-between",
+            alignItems: "baseline",
+        }} direction="row" spacing={{ xs: 1, sm: 2 }}>
             {users.map((user: any, index: number) => (
-                <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
-                    <UserCard user={user} />
-                </Grid>
+
+
+                <UserCard key={index} user={user} />
+
+
+
             ))}
-        </Grid>
+        </Stack>
     )
 }

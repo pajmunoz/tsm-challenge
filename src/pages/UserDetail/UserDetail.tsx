@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { getUsersId, getUsersIdPost } from "../../api/usersApi";
 import { useQuery } from "@tanstack/react-query";
-import { Box } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import PostCard from "../../components/PostCard/PostCard";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -19,20 +19,26 @@ export default function UserDetail() {
     });
 
     return (
-        <>
+        <Container maxWidth="md" sx={{ marginTop: '2.5em' }}>
             {isLoading ? <div>Loading...</div> : (
                 <div>
-                    <Link
-                        to="/"
+                    <Stack direction="row" spacing={2}>
+                        <Link
+                            to="/"
+                        >
+                            <Button size="small" startIcon={<ArrowBackIcon />}>
+                                Volver
+                            </Button>
+                        </Link>
+                    </Stack>
 
-                    >
-                        <ArrowBackIcon />Volver
-                    </Link>
-                    <h1>{user.name}</h1>
+
+                    <Typography variant="h3">{user.name}</Typography>
+
                 </div>
             )}
             <div>
-                <h1>Posts</h1>
+                <Typography variant="h4">Posts</Typography>
                 {isLoadingPosts ? <div>Loading...</div> : (
                     <Box
                         sx={{
@@ -48,6 +54,6 @@ export default function UserDetail() {
                     </Box>
                 )}
             </div>
-        </>
+        </Container>
     )
 }
