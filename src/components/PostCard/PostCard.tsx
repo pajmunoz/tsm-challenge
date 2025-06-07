@@ -3,7 +3,7 @@ import { Card, CardContent, Typography } from "@mui/material";
 
 export default function PostCard({post}:{post:any}) {
     return (
-        <Card variant="outlined" key={post.id}>
+        <Card variant="outlined">
             <CardContent>
                 <Typography variant="h5" component="div">
                     {post.title}

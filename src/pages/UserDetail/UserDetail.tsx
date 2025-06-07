@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getUsersId, getUsersIdPost } from "../../api/usersApi";
 import { useQuery } from "@tanstack/react-query";
 import { Box } from "@mui/material";
 import PostCard from "../../components/PostCard/PostCard";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function UserDetail() {
     const { id } = useParams();
@@ -21,6 +22,12 @@ export default function UserDetail() {
         <>
             {isLoading ? <div>Loading...</div> : (
                 <div>
+                    <Link
+                        to="/"
+
+                    >
+                        <ArrowBackIcon />Volver
+                    </Link>
                     <h1>{user.name}</h1>
                 </div>
             )}
@@ -36,7 +43,7 @@ export default function UserDetail() {
                         }}
                     >
                         {posts.map((post: any) => (
-                            <PostCard post={post} />
+                            <PostCard key={post.id} post={post} />
                         ))}
                     </Box>
                 )}
