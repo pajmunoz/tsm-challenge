@@ -1,12 +1,12 @@
-import { Box, Card, CardContent, Skeleton, Stack, Typography } from "@mui/material";
+import { Paper, Skeleton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 
 export default function UserListSkeleton() {
     return (
         <Stack spacing={4}>
-            <Typography component="div" variant={'h1'}>
+            <Typography component="div" variant={'h3'} sx={{ paddingTop: '2rem', paddingBottom: '0', marginBottom: '0' }}>
                 <Skeleton />
             </Typography>
-            <Typography component="div" variant={'h3'}>
+            <Typography component="div" variant={'h1'} sx={{ paddingTop: '0' }}>
                 <Skeleton />
             </Typography>
             <Stack
@@ -19,31 +19,41 @@ export default function UserListSkeleton() {
                 direction="row"
                 spacing={{ xs: 1, sm: 2 }}
             >
-                {[...Array(6)].map((_, index) => (
-                    <Card
-                        key={index}
-                        sx={{
-                            maxWidth: 260,
-                            width: 260,
-                            height: '100%',
-                        }}
-                    >
-                        <CardContent>
-                            <Skeleton variant="text" width="80%" height={40} sx={{ mb: 2 }} />
-                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                                {[...Array(5)].map((_, i) => (
-                                    <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <Skeleton variant="circular" width={20} height={20} />
-                                        <Skeleton variant="text" width="70%" />
-                                    </Box>
+
+                <TableContainer component={Paper} sx={{ margin: '1rem 0', boxShadow: 3, borderRadius: 2, overflow: 'hidden' }}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                {[...Array(6)].map((_, index) => (
+                                    <TableCell key={index}>
+                                        <Skeleton
+                                            variant="text"
+                                            width={100}
+                                            height={40}
+                                            animation="wave"
+                                        />
+                                    </TableCell>
                                 ))}
-                            </Box>
-                            <Box sx={{ mt: 2 }}>
-                                <Skeleton variant="rectangular" width={100} height={24} />
-                            </Box>
-                        </CardContent>
-                    </Card>
-                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {[...Array(5)].map((_, rowIndex) => (
+                                <TableRow key={rowIndex}>
+                                    {[...Array(6)].map((_, colIndex) => (
+                                        <TableCell key={colIndex}>
+                                            <Skeleton
+                                                variant="text"
+                                                width="80%"
+                                                height={24}
+                                                animation="wave"
+                                            />
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Stack>
         </Stack>
     )

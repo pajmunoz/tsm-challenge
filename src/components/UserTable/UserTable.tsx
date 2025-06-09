@@ -61,7 +61,14 @@ export default function UserTable({ users, onSort }: UserTableProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {!users.length ? (
+                        <tr>
+                            <td colSpan={columns.length} style={{ textAlign: 'center' }}>
+                                <Typography variant="body2" component="p">No users found</Typography>
+                            </td>
+                        </tr>
+                    ) : (
+                    users.map((user) => (
                         <tr key={user.id} onClick={() => handleNavigate(user.id)}>
                             {columns.map((column) => (
                                 <td key={column.field}>
@@ -71,7 +78,7 @@ export default function UserTable({ users, onSort }: UserTableProps) {
                                 </td>
                             ))}
                         </tr>
-                    ))}
+                    )))}
                 </tbody>
             </table>
         </div>
