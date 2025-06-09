@@ -16,10 +16,6 @@ export default function PostCard({ post }: { post: Post }) {
                 width: '100%',
                 height: '100%',
                 transition: 'transform 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 8px 16px rgba(0,0,0,0.1)'
-                }
             }}
         >
             <CardContent>

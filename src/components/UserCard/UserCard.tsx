@@ -7,6 +7,13 @@ import BusinessIcon from '@mui/icons-material/Business';
 import PersonIcon from '@mui/icons-material/Person';
 
 export default function UserCard({ user }: { user: any }) {
+    const userCardItems = [
+        { icon: <PersonIcon color="action" />, value: user.username },
+        { icon: <EmailIcon color="action" />, value: user.email },
+        { icon: <PhoneIcon color="action" />, value: user.phone },
+        { icon: <LocationOnIcon color="action" />, value: user.address?.city },
+        { icon: <BusinessIcon color="action" />, value: user.company?.name },
+    ];
     return (
         <Link to={`/user/${user.id}`} style={{ textDecoration: 'none' }}>
             <Card 
@@ -37,40 +44,14 @@ export default function UserCard({ user }: { user: any }) {
                         </Typography>
                         
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <PersonIcon color="action" />
+                        {userCardItems.map((item, index) => (
+                            <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                {item.icon}
                                 <Typography variant="body2" color="text.secondary">
-                                    {user.username}
+                                    {item.value}
                                 </Typography>
                             </Box>
-                            
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <EmailIcon color="action" />
-                                <Typography variant="body2" color="text.secondary">
-                                    {user.email}
-                                </Typography>
-                            </Box>
-                            
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <PhoneIcon color="action" />
-                                <Typography variant="body2" color="text.secondary">
-                                    {user.phone}
-                                </Typography>
-                            </Box>
-                            
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <LocationOnIcon color="action" />
-                                <Typography variant="body2" color="text.secondary">
-                                    {user.address.city}
-                                </Typography>
-                            </Box>
-                            
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <BusinessIcon color="action" />
-                                <Typography variant="body2" color="text.secondary">
-                                    {user.company.name}
-                                </Typography>
-                            </Box>
+                        ))}
                         </Box>
 
                         <Box sx={{ mt: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>

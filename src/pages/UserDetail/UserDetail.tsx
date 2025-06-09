@@ -25,10 +25,16 @@ export default function UserDetail() {
         queryFn: () => getUsersIdPost(id || ''),
     });
 
+    const userInfoItems = [
+        { icon: <PersonIcon color="action" />, value: user.username },
+        { icon: <EmailIcon color="action" />, value: user.email },
+        { icon: <PhoneIcon color="action" />, value: user.phone },
+        { icon: <LocationOnIcon color="action" />, value: user.address?.city },
+        { icon: <BusinessIcon color="action" />, value: user.company?.name },
+    ];
+
     return (
         <Container maxWidth="md" sx={{ marginTop: '2.5em' }}>
-
-
             {isLoading ? (
                 <UserInfoSkeleton />
             ) : (
@@ -48,40 +54,14 @@ export default function UserDetail() {
                         </Box>
                         <Divider sx={{ margin: '.2rem 0' }} />
 
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <PersonIcon color="action" />
-                            <Typography variant="body2" color="text.secondary">
-                                {user.username}
-                            </Typography>
-                        </Box>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <EmailIcon color="action" />
-                            <Typography variant="body2" color="text.secondary">
-                                {user.email}
-                            </Typography>
-                        </Box>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <PhoneIcon color="action" />
-                            <Typography variant="body2" color="text.secondary">
-                                {user.phone}
-                            </Typography>
-                        </Box>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <LocationOnIcon color="action" />
-                            <Typography variant="body2" color="text.secondary">
-                                {user.address.city}
-                            </Typography>
-                        </Box>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <BusinessIcon color="action" />
-                            <Typography variant="body2" color="text.secondary">
-                                {user.company.name}
-                            </Typography>
-                        </Box>
+                        {userInfoItems.map((item, index) => (
+                            <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                {item.icon}
+                                <Typography variant="body2" color="text.secondary">
+                                    {item.value}
+                                </Typography>
+                            </Box>
+                        ))}
                     </Box>
                 </>
             )}
