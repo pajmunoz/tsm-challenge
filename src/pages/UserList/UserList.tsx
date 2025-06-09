@@ -26,19 +26,33 @@ export default function UserList() {
         queryFn: getUsers,
     });
 
-    const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+    const [sortDirection, setSortDirection] = useState('asc');
 
-    const handleSortByName = () => {
+    const handleSort = (field: string) => {
+        //creo una constante para cambiar la direccion de la ordenacion
         const newSortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+        //actualizo la direccion de la ordenacion del state
         setSortDirection(newSortDirection);
-
+        //ordeno los usuarios por el campo especifico
         const sortedUsers = [...users].sort((a, b) => {
-            const comparison = a.name.localeCompare(b.name);
-            return newSortDirection === 'asc' ? comparison : -comparison;
+            //obtengo tanto un objeto como un path y lo separo por puntos
+            const getValue = (obj: any, path: string) => {
+                return path.split('.').reduce((acc, part) => acc?.[part], obj);
+            };
+
+            const valueA = getValue(a, field);
+            //console.log('valueA', valueA);
+            const valueB = getValue(b, field);
+            //console.log('valueB', valueB);
+            //comparo los valores y devuelvo el resultado
+            return newSortDirection === 'asc' 
+                ? String(valueA).localeCompare(String(valueB))
+                : String(valueB).localeCompare(String(valueA));
         });
 
         setFilteredUsers(sortedUsers);
-    }
+    };
+
     const [filteredUsers, setFilteredUsers] = useState<User[]>(users);
 
     const handleSearch = (searchTerm: string) => {
@@ -65,7 +79,10 @@ export default function UserList() {
             ) : (
                 <Stack spacing={4}>
                     <UserSearch onSearch={handleSearch} />
-                    <UserTable2 users={!filteredUsers.length ? users : filteredUsers} />
+                    <UserTable2 
+                        users={!filteredUsers.length ? users : filteredUsers} 
+                        onSort={handleSort}
+                    />
 
                 </Stack>
             )

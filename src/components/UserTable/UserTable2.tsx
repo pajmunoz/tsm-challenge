@@ -1,7 +1,4 @@
-import { DataGrid } from '@mui/x-data-grid';
-import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { Box, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 interface User {
     id: number;
@@ -17,54 +14,52 @@ interface User {
     };
 }
 
-interface UserTable2Props {
+interface UserTableProps {
     users: User[];
+    onSort: (field: string) => void;
 }
 
-const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    {
-        field: 'actions',
-        headerName: 'Link',
-        width: 150,
-        renderCell: (params: GridRenderCellParams<User>) => <Link to={`/user/${params.row.id}`}><Button size="small" variant="text">View More</Button> </Link>
-    },
-    { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'username', headerName: 'Username', width: 130 },
-    { field: 'email', headerName: 'Email', width: 200 },
-    { field: 'phone', headerName: 'Phone', width: 150 },
-    {
-        field: 'city',
-        headerName: 'City',
-        width: 130,
-        renderCell: (params: GridRenderCellParams<User>) => params.row.address?.city || ''
-    },
-    {
-        field: 'company',
-        headerName: 'Company',
-        width: 150,
-        renderCell: (params: GridRenderCellParams<User>) => params.row.company?.name || ''
-    },
-
+const columns = [
+    { field: 'name', label: 'Name' },
+    { field: 'username', label: 'Username' },
+    { field: 'email', label: 'Email' },
+    { field: 'phone', label: 'Phone' },
+    { field: 'address.city', label: 'City' },
+    { field: 'company.name', label: 'Company' }
 ];
 
-export default function UserTable2({ users }: UserTable2Props) {
+export default function UserTable2({ users, onSort }: UserTableProps) {
     return (
-        <Box sx={{ height: 500, width: '100%', mt: 2 }}>
-
-            <DataGrid
-                rows={users}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 10 },
-                    },
-                }}
-                pageSizeOptions={[10, 25]}
-                checkboxSelection={false}
-                disableRowSelectionOnClick={true}
-            />
-
-        </Box>
+        <TableContainer component={Paper} sx={{ mt: 2 }}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        {columns.map((column) => (
+                            <TableCell key={column.field}>
+                                <Button 
+                                    size="small" 
+                                    variant="text" 
+                                    onClick={() => onSort(column.field)}
+                                >
+                                    {column.label}
+                                </Button>
+                            </TableCell>
+                        ))}
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {users.map((user) => (
+                        <TableRow key={user.id}>
+                            <TableCell>{user.name}</TableCell>
+                            <TableCell>{user.username}</TableCell>
+                            <TableCell>{user.email}</TableCell>
+                            <TableCell>{user.phone}</TableCell>
+                            <TableCell>{user.address.city}</TableCell>
+                            <TableCell>{user.company.name}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
