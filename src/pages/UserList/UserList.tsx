@@ -3,7 +3,8 @@ import { getUsers } from "../../api/usersApi";
 import UserSearch from "../../components/UserSearch/UserSearch"
 import UserTable from "../../components/UserTable/UserTable"
 import { useState } from "react";
-import { Container, Stack } from "@mui/material";
+import { Container, Stack} from "@mui/material";
+import UserListSkeleton from "../../components/skeletons/UserListSkeleton/UserListSkeleton";
 
 interface User {
     id: number;
@@ -42,18 +43,20 @@ export default function UserList() {
         setFilteredUsers(filtered);
     };
 
-    if (isLoading) {
-        return (
-            <>Loading...</>
-        );
-    }
+    return (<Container maxWidth="md">
+        <Stack spacing={4}>
 
-    return (
-        <Container maxWidth="md">
-            <Stack spacing={4}>
-                <UserSearch onSearch={handleSearch} />
-                <UserTable users={!filteredUsers.length ? users : filteredUsers} />
-            </Stack>
-        </Container>
+            {
+                isLoading ? (
+                    <UserListSkeleton />
+                ) : (
+                    <Stack spacing={4}>
+                        <UserSearch onSearch={handleSearch} />
+                        <UserTable users={!filteredUsers.length ? users : filteredUsers} />
+                    </Stack>
+                )
+            }
+        </Stack>
+    </Container>
     )
 }

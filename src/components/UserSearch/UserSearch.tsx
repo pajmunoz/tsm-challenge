@@ -3,12 +3,11 @@ import SearchIcon from '@mui/icons-material/Search';
 
 interface UserSearchProps {
     onSearch: (searchTerm: string) => void;
+    isLoading?: boolean;
 }
 
 export default function UserSearch({ onSearch }: UserSearchProps) {
     return (
-
-
         <Stack spacing={3} sx={{ width: '100%', padding: '2rem' }}>
             <Typography
                 variant="h3"
@@ -54,6 +53,5 @@ export default function UserSearch({ onSearch }: UserSearchProps) {
                 )}
             />
         </Stack>
-
     )
 }

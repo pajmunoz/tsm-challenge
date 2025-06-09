@@ -9,6 +9,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import BusinessIcon from '@mui/icons-material/Business';
 import PersonIcon from '@mui/icons-material/Person';
+import UserInfoSkeleton from "../../components/skeletons/UserInfoSkeleton/UserInfoSkeleton";
+import PostSkeleton from "../../components/skeletons/PostSkeleton/PostSkeleton";
 
 export default function UserDetail() {
     const { id } = useParams();
@@ -25,19 +27,19 @@ export default function UserDetail() {
 
     return (
         <Container maxWidth="md" sx={{ marginTop: '2.5em' }}>
-            {isLoading ? <div>Loading...</div> : (
-                <div>
+
+
+            {isLoading ? (
+                <UserInfoSkeleton />
+            ) : (
+                <>
                     <Stack direction="row" spacing={2}>
-                        <Link
-                            to="/"
-                        >
+                        <Link to="/#">
                             <Button size="small" startIcon={<ArrowBackIcon />}>
-                                Volver
+                                Back
                             </Button>
                         </Link>
                     </Stack>
-
-
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <Typography variant="h6" color="text.secondary" sx={{ marginTop: '2rem' }}>
@@ -81,27 +83,30 @@ export default function UserDetail() {
                             </Typography>
                         </Box>
                     </Box>
-
-                </div>
+                </>
             )}
 
             <div>
                 <Typography variant="h6" color="text.secondary" sx={{ marginTop: '2rem' }}>Posts</Typography>
                 <Divider sx={{ margin: '1rem 0' }} />
-                {isLoadingPosts ? <div>Loading...</div> : (
-                    <Box
-                        sx={{
-                            width: '100%',
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fill, minmax(min(400px, 100%), 1fr))',
-                            gap: 2,
-                        }}
-                    >
-                        {posts.map((post: any) => (
+                <Box
+                    sx={{
+                        width: '100%',
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(min(400px, 100%), 1fr))',
+                        gap: 2,
+                    }}
+                >
+                    {isLoadingPosts ? (
+                        [...Array(4)].map((_, index) => (
+                            <PostSkeleton key={index} />
+                        ))
+                    ) : (
+                        posts.map((post: any) => (
                             <PostCard key={post.id} post={post} />
-                        ))}
-                    </Box>
-                )}
+                        ))
+                    )}
+                </Box>
             </div>
         </Container>
     )
