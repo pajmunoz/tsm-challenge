@@ -1,4 +1,4 @@
-import { Divider, Grid, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import UserCard from "../UserCard/UserCard";
 
 export default function UserTable({ users }: { users: any[] }) {

@@ -1,4 +1,4 @@
-import { Autocomplete, Stack, TextField, Typography, Paper } from "@mui/material";
+import { Autocomplete, Stack, TextField, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 interface UserSearchProps {

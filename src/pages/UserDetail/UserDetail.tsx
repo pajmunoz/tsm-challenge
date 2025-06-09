@@ -1,9 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import { getUsersId, getUsersIdPost } from "../../api/usersApi";
 import { useQuery } from "@tanstack/react-query";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, Stack, Typography } from "@mui/material";
 import PostCard from "../../components/PostCard/PostCard";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import BusinessIcon from '@mui/icons-material/Business';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function UserDetail() {
     const { id } = useParams();
@@ -33,18 +38,62 @@ export default function UserDetail() {
                     </Stack>
 
 
-                    <Typography variant="h3">{user.name}</Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Typography variant="h6" color="text.secondary" sx={{ marginTop: '2rem' }}>
+                                {user.name}
+                            </Typography>
+                        </Box>
+                        <Divider sx={{ margin: '.2rem 0' }} />
+
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <PersonIcon color="action" />
+                            <Typography variant="body2" color="text.secondary">
+                                {user.username}
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <EmailIcon color="action" />
+                            <Typography variant="body2" color="text.secondary">
+                                {user.email}
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <PhoneIcon color="action" />
+                            <Typography variant="body2" color="text.secondary">
+                                {user.phone}
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <LocationOnIcon color="action" />
+                            <Typography variant="body2" color="text.secondary">
+                                {user.address.city}
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <BusinessIcon color="action" />
+                            <Typography variant="body2" color="text.secondary">
+                                {user.company.name}
+                            </Typography>
+                        </Box>
+                    </Box>
 
                 </div>
             )}
+
             <div>
-                <Typography variant="h4">Posts</Typography>
+                <Typography variant="h6" color="text.secondary" sx={{ marginTop: '2rem' }}>Posts</Typography>
+                <Divider sx={{ margin: '1rem 0' }} />
                 {isLoadingPosts ? <div>Loading...</div> : (
                     <Box
                         sx={{
                             width: '100%',
                             display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fill, minmax(min(200px, 100%), 1fr))',
+                            gridTemplateColumns: 'repeat(auto-fill, minmax(min(400px, 100%), 1fr))',
                             gap: 2,
                         }}
                     >

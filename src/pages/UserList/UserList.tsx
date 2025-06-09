@@ -3,7 +3,7 @@ import { getUsers } from "../../api/usersApi";
 import UserSearch from "../../components/UserSearch/UserSearch"
 import UserTable from "../../components/UserTable/UserTable"
 import { useState } from "react";
-import { Container, Stack, CircularProgress, Box } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 
 interface User {
     id: number;
