@@ -1,54 +1,53 @@
-# React + TypeScript + Vite
+# TSM Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un proyecto de React desarrollado con TypeScript y Vite, tambiem Material-UI para la interfaz de usuario, hecho con la mejor energia y con mucho interes en conseguir trabajo pronto.
 
-Currently, two official plugins are available:
+## Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- TypeScript
+- Vite
+- Material-UI (MUI)
+- React Router
+- React Query
+- ESLint
 
-## Expanding the ESLint configuration
+## Prerrequisitos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 
+- npm
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Instalación
+
+1. Clona el repositorio:
+```bash
+git clone https://github.com/pajmunoz/tsm-challenge.git
+cd tsm-challenge
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Instala las dependencias:
+```bash
+npm install
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts Disponibles
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Compila el proyecto para producción
+- `npm run preview` - Previsualiza la versión de producción localmente
+- `npm run lint` - Ejecuta el linter para verificar el código
+- `npm run deploy` - Despliega la aplicación en GitHub Pages
+
+## Deploy
+
+El proyecto está configurado para desplegarse automáticamente en GitHub Pages. La aplicación está disponible en: https://pajmunoz.github.io/tsm-challenge
+
+## Estructura del Proyecto
+
+```
+tsm-challenge/
+├── src/           # Código fuente
+├── public/        # Archivos estáticos
+├── dist/          # Build de producción
+└── ...
 ```
