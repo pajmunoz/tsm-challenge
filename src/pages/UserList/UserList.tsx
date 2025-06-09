@@ -4,7 +4,7 @@ import UserSearch from "../../components/UserSearch/UserSearch"
 import { useState } from "react";
 import { Container, Stack } from "@mui/material";
 import UserListSkeleton from "../../components/skeletons/UserListSkeleton/UserListSkeleton";
-import UserTable2 from "../../components/UserTable/UserTable2";
+import UserTable2 from "../../components/UserTable/UserTable";
 
 interface User {
     id: number;
@@ -70,7 +70,7 @@ export default function UserList() {
         setFilteredUsers(filtered);
     };
 
-    return (<Container maxWidth="md">
+    return (<Container maxWidth="lg">
 
 
         {
