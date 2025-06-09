@@ -2,10 +2,11 @@
   "name": "tsm-challenge",
   "private": true,
   "version": "1.0.0",
+  "homepage": "https://pajmunoz.github.io/tsm-challenge",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
