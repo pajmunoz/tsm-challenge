@@ -35,10 +35,6 @@ export default function UserSearch({ onSearch }: UserSearchProps) {
                     {...params}
                     label="Search users"
                     placeholder="Search by name, username, email or company"
-                    InputProps={{
-                        ...params.InputProps,
-                        startAdornment: <SearchIcon sx={{ color: 'action.active', mr: 1 }} />,
-                    }}
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             borderRadius: '12px',

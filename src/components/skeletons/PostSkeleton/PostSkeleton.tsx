@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Divider, Skeleton, Stack } from "@mui/material";
-
+//componente de skeleton para los posts, pasandole el numero de items que se van a mostrar
 export default function PostSkeleton({ indexOfItem }: { indexOfItem: number }) {
     return (
         <>

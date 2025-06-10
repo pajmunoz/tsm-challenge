@@ -10,12 +10,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import LanguageIcon from '@mui/icons-material/Language';
 import { getUsersId } from "../../api/usersApi";
 import UserInfoSkeleton from "../skeletons/UserInfoSkeleton/UserInfoSkeleton";
+import ErrorState from "../ErrorState/ErrorState";
 
 export default function UserDetailContainer({ id }: { id: string }) {
-
-    const { data: user = [], isLoading } = useQuery({
+    //agrego  error boundary
+    const { data: user = [], isLoading, error, refetch } = useQuery({
         queryKey: ['users', id],
         queryFn: () => getUsersId(id || ''),
+        retry: 1,
     });
 
     const userInfoItems = [
@@ -26,6 +28,16 @@ export default function UserDetailContainer({ id }: { id: string }) {
         { icon: <BusinessIcon color="action" />, value: user.company?.name },
         { icon: <LanguageIcon color="action" />, value: user.website },
     ];
+
+    //si hay un error, muestro mensaje de error y recargo
+    if (error) {
+        return (
+            <ErrorState 
+                message={error instanceof Error ? error.message : 'Failed to load user details'} 
+                onRetry={() => refetch()} 
+            />
+        );
+    }
 
     return (
         isLoading ? (
@@ -45,10 +57,8 @@ export default function UserDetailContainer({ id }: { id: string }) {
                     </Typography>
                 </Box>
                 <Divider sx={{ margin: '1rem 0' }} />
-                <Box sx={{ display: 'flex', gap: 2, flexDirection: {  xs: 'column', sm: 'row' } }}>
+                <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
                     <Box sx={{ flex: 3, display: 'flex', flexDirection: 'column', gap: 1 }}>
-
-
                         {userInfoItems.map((item, index) => (
                             <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                 {item.icon}
@@ -59,6 +69,7 @@ export default function UserDetailContainer({ id }: { id: string }) {
                         ))}
                     </Box>
                 </Box>
-            </>)
-    )
+            </>
+        )
+    );
 }

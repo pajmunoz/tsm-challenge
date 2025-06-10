@@ -3,8 +3,10 @@ import { getUsers } from "../../api/usersApi";
 import UserSearch from "../../components/UserSearch/UserSearch"
 import { useState, useEffect } from "react";
 import { Container, Stack } from "@mui/material";
-import UserListSkeleton from "../../components/skeletons/UserListSkeleton/UserListSkeleton";
+import UserTableSkeleton from "../../components/skeletons/UserTableSkeleton/UserTableSkeleton";
 import UserTable from "../../components/UserTable/UserTable";
+import ErrorState from "../../components/ErrorState/ErrorState";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 interface User {
     id: number;
@@ -22,9 +24,10 @@ interface User {
 
 export default function UserList() {
     //uso react query para obtener los usuarios y evita hacer peticiones innecesarias
-    const { data: users = [], isLoading } = useQuery<User[]>({
+    const { data: users = [], isLoading, error, refetch } = useQuery<User[]>({
         queryKey: ['users'],
         queryFn: getUsers,
+        retry: 1,
     });
 
     const [sortDirection, setSortDirection] = useState('asc');
@@ -78,19 +81,31 @@ export default function UserList() {
         setFilteredUsers(filtered);
     };
 
-    return (<Container maxWidth="lg">
-        {isLoading ? (
-                <UserListSkeleton />
-            ) : (
-                <Stack spacing={4}>
-                    <UserSearch onSearch={handleSearch} />
-                    <UserTable
-                        users={filteredUsers}
-                        onSort={handleSort}
-                    />
-                </Stack>
-            )
-        }
-    </Container>
-    )
+    //si hay un error, mostrar menjase, y envuelvo html con ErrorBoundary
+    if (error) {
+        return (
+            <ErrorState 
+                message={error instanceof Error ? error.message : 'Failed to load users'} 
+                onRetry={() => refetch()} 
+            />
+        );
+    }
+
+    return (
+        <ErrorBoundary>
+            <Container maxWidth="lg">
+                {isLoading ? (
+                    <UserTableSkeleton />
+                ) : (
+                    <Stack spacing={4}>
+                        <UserSearch onSearch={handleSearch} />
+                        <UserTable
+                            users={filteredUsers}
+                            onSort={handleSort}
+                        />
+                    </Stack>
+                )}
+            </Container>
+        </ErrorBoundary>
+    );
 }

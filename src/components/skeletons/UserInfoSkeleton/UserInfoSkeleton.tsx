@@ -1,5 +1,5 @@
 import { Box, Divider, Skeleton, Stack } from "@mui/material";
-
+//paso el numero de items que se van a mostrar con indexOfItem
 export default function UserInfoSkeleton({ indexOfItem }: { indexOfItem: number }) {
     return (
         <Stack spacing={3}>
