@@ -34,7 +34,7 @@ const PostContainer = memo(function PostContainer({ id }: { id: string }) {
                 <PostSkeleton indexOfItem={posts.length || 4} />
             ) : (
                 <>
-                    <Typography variant="h6" color="text.secondary" sx={{ marginTop: '2rem' }}>Posts</Typography>
+                    <Typography variant="h6" color="text.secondary" sx={{ marginTop: '2rem' }}>({posts.length}) Posts</Typography>
                     <Divider sx={{ margin: '1rem 0' }} />
                     <Box
                         sx={{
