@@ -49,6 +49,9 @@ export default function UserTable({ users, onSort }: UserTableProps) {
                         {columns.map((column) => (
                             <th key={column.field}>
                                 <Button
+                                    sx={{
+                                        width: '100%',
+                                    }}
                                     size="small"
                                     variant="text"
                                     onClick={() => onSort(column.field)}
