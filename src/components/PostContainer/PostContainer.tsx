@@ -3,13 +3,18 @@ import PostCard from "../PostCard/PostCard";
 import PostSkeleton from "../skeletons/PostSkeleton/PostSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import { getUsersIdPost } from "../../api/usersApi";
+import { memo, useMemo } from "react";
 
-export default function PostContainer({ id }: { id: string }) {
+const PostContainer = memo(function PostContainer({ id }: { id: string }) {
 
     const { data: posts = [], isLoading: isLoadingPosts } = useQuery({
         queryKey: ['posts', id],
         queryFn: () => getUsersIdPost(id || ''),
     });
+    const memoizedPosts = useMemo(() => posts.map((post: any) => (
+        <PostCard key={post.id} post={post} />
+    )), [posts]);
+    
     return (
         <>
             {isLoadingPosts ? (
@@ -28,9 +33,7 @@ export default function PostContainer({ id }: { id: string }) {
                             gap: 2,
                         }}
                     >
-                        {posts.map((post: any) => (
-                            <PostCard key={post.id} post={post} />
-                        ))}
+                        {memoizedPosts}
                     </Box>
                 </>
             )}
@@ -38,3 +41,6 @@ export default function PostContainer({ id }: { id: string }) {
     )
 
 }
+)
+
+export default PostContainer;

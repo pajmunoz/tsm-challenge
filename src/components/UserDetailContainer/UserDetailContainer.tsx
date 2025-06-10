@@ -46,9 +46,6 @@ export default function UserDetailContainer({ id }: { id: string }) {
                 </Box>
                 <Divider sx={{ margin: '1rem 0' }} />
                 <Box sx={{ display: 'flex', gap: 2, flexDirection: {  xs: 'column', sm: 'row' } }}>
-                    <Box sx={{ flex: 1, width: '100%', height: '200px' }}>
-                        <img src={'https://i.pravatar.cc/300'} alt={user.name} style={{ width: '100%', height: '100%', borderRadius: '10px', objectFit: 'cover' }} />
-                    </Box>
                     <Box sx={{ flex: 3, display: 'flex', flexDirection: 'column', gap: 1 }}>
 
 
@@ -61,10 +58,6 @@ export default function UserDetailContainer({ id }: { id: string }) {
                             </Box>
                         ))}
                     </Box>
-
-                </Box>
-                <Box sx={{ marginTop: '2rem', marginBottom: '2rem'}}>
-                    <iframe style={{ borderRadius: '10px' }} width="100%" height="250" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.mapsdirections.info/calcular-la-población-en-un-mapa">Mapa de población</a></iframe>
                 </Box>
             </>)
     )
