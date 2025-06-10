@@ -68,7 +68,7 @@ export default function UserList() {
             setFilteredUsers(users);
             return;
         }
-
+        //filtro los usuarios por el nombre, username, email y company name
         const filtered = users.filter(user =>
             user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -79,10 +79,7 @@ export default function UserList() {
     };
 
     return (<Container maxWidth="lg">
-
-
-        {
-            isLoading ? (
+        {isLoading ? (
                 <UserListSkeleton />
             ) : (
                 <Stack spacing={4}>
@@ -91,11 +88,9 @@ export default function UserList() {
                         users={filteredUsers}
                         onSort={handleSort}
                     />
-
                 </Stack>
             )
         }
-
     </Container>
     )
 }
