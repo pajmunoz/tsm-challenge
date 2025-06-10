@@ -11,32 +11,30 @@ export default function PostContainer({ id }: { id: string }) {
         queryFn: () => getUsersIdPost(id || ''),
     });
     return (
-        isLoadingPosts ? (
-            <PostSkeleton />
-        ) : (
-            <>
-                <Typography variant="h6" color="text.secondary" sx={{ marginTop: '2rem' }}>Posts</Typography>
-                <Divider sx={{ margin: '1rem 0' }} />
-                <Box
-                    sx={{
-                        width: '100%',
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(min(400px, 100%), 1fr))',
-                        gap: 2,
-                    }}
-                >
+        <>
+            {isLoadingPosts ? (
 
-                    {isLoadingPosts ? (
-                        [...Array(4)].map((_, index) => (
-                            <PostSkeleton key={index} />
-                        ))
-                    ) : (
-                        posts.map((post: any) => (
+                <PostSkeleton indexOfItem={posts.length || 4} />
+
+            ) : (
+                <>
+                    <Typography variant="h6" color="text.secondary" sx={{ marginTop: '2rem' }}>Posts</Typography>
+                    <Divider sx={{ margin: '1rem 0' }} />
+                    <Box
+                        sx={{
+                            width: '100%',
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fill, minmax(min(800px, 100%), 1fr))',
+                            gap: 2,
+                        }}
+                    >
+                        {posts.map((post: any) => (
                             <PostCard key={post.id} post={post} />
-                        ))
-                    )}
-                </Box>
-            </>
-        )
+                        ))}
+                    </Box>
+                </>
+            )}
+        </>
     )
+
 }

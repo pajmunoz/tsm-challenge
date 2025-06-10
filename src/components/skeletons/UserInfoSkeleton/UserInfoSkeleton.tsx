@@ -1,6 +1,6 @@
 import { Box, Divider, Skeleton, Stack } from "@mui/material";
 
-export default function UserInfoSkeleton() {
+export default function UserInfoSkeleton({ indexOfItem }: { indexOfItem: number }) {
     return (
         <Stack spacing={3}>
             <Stack direction="row" spacing={2}>
@@ -29,7 +29,7 @@ export default function UserInfoSkeleton() {
                 </Box>
                 <Divider sx={{ margin: '.2rem 0' }} />
 
-                {[...Array(5)].map((_, index) => (
+                {[...Array(indexOfItem)].map((_, index) => (
                     <Box 
                         key={index} 
                         sx={{ 
